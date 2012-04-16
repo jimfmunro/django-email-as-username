@@ -25,6 +25,11 @@ def get_user(email, queryset=None):
         queryset = User.objects
     return queryset.get(username=_email_to_username(email))
 
+def get_user_by_hash(hash):
+    return User.objects.get(username=hash)
+
+def get_user_hash(email):
+    return _email_to_username(email)
 
 def user_exists(email, queryset=None):
     """
