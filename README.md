@@ -33,6 +33,7 @@ Install from PyPI:
     pip install django-email-as-username
 
 Add 'emailusernames' to INSTALLED_APPS.
+Make sure to include it further down the list than 'django.contrib.auth'.
 
     INSTALLED_APPS = (
         ...
@@ -135,6 +136,19 @@ the view.
     )
 
 
+Management commands
+===================
+
+`emailusernames` will patch up the `syncdb` and `createsuperuser` managment
+commands, to ensure that they take email usernames.
+
+    bash: ./manage.py syncdb
+    ...
+    You just installed Django's auth system, which means you don't have any superusers defined.
+    Would you like to create one now? (yes/no): yes
+    E-mail address:
+
+
 Migrating existing projects
 ===========================
 
@@ -193,6 +207,19 @@ tests you'll need to find a way to explicitly disable them.
 
 Changelog
 =========
+
+1.4.6
+-----
+
+* EmailAuthenticationForm takes request as first argument, same as Django's
+  AuthenticationForm.  Now fixed so it won't break if you didn't specify
+  data as a kwarg.
+
+1.4.5
+-----
+
+* Email form max lengths should be 75 chars, not 70 chars.
+* Use `get_static_prefix` (Supports 1.3 and 1.4.), not `admin_media_prefix`.
 
 1.4.4
 -----

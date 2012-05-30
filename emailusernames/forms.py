@@ -16,12 +16,12 @@ class EmailAuthenticationForm(AuthenticationForm):
     """
     Override the default AuthenticationForm to force email-as-username behavior.
     """
-    email = forms.EmailField(label=_("Email"), max_length=70)
+    email = forms.EmailField(label=_("Email"), max_length=75)
     message_incorrect_password = ERROR_MESSAGE
     message_inactive = ERROR_MESSAGE_INACTIVE
 
-    def __init__(self, *args, **kwargs):
-        super(EmailAuthenticationForm, self).__init__(*args, **kwargs)
+    def __init__(self, request=None, *args, **kwargs):
+        super(EmailAuthenticationForm, self).__init__(request, *args, **kwargs)
         del self.fields['username']
 
     def clean(self):
@@ -42,7 +42,7 @@ class EmailAdminAuthenticationForm(AdminAuthenticationForm):
     """
     Override the default AuthenticationForm to force email-as-username behavior.
     """
-    email = forms.EmailField(label=_("Email"), max_length=70)
+    email = forms.EmailField(label=_("Email"), max_length=75)
     message_incorrect_password = ERROR_MESSAGE
     message_inactive = ERROR_MESSAGE_INACTIVE
     message_restricted = ERROR_MESSAGE_RESTRICTED
@@ -71,7 +71,7 @@ class EmailUserCreationForm(UserCreationForm):
     """
     Override the default UserCreationForm to force email-as-username behavior.
     """
-    email = forms.EmailField(label=_("Email"), max_length=70)
+    email = forms.EmailField(label=_("Email"), max_length=75)
 
     class Meta:
         model = User
@@ -92,7 +92,7 @@ class EmailUserChangeForm(UserChangeForm):
     """
     Override the default UserChangeForm to force email-as-username behavior.
     """
-    email = forms.EmailField(label=_("Email"), max_length=70)
+    email = forms.EmailField(label=_("Email"), max_length=75)
 
     class Meta:
         model = User
